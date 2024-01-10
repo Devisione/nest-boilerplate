@@ -1,7 +1,7 @@
 import type { TestingModule } from "@nestjs/testing";
 import { Test } from "@nestjs/testing";
-import { ExamplesController } from "./examples.controller";
-import { ExamplesService } from "./examples.service";
+import { ExamplesPrivateController } from "./examples.private-controller";
+import { ExamplesPrivateService } from "./examples.private-service";
 import type { Example } from "./entities/example.entity";
 import type { CreateExampleDto } from "./dto/create-example.dto";
 
@@ -16,18 +16,20 @@ const CREATE_EXAMPLE_DTO_MOCK: CreateExampleDto = {
 };
 
 describe("Testing for examples controller", () => {
-  let controller: ExamplesController;
-  let service: ExamplesService;
+  let controller: ExamplesPrivateController;
+  let service: ExamplesPrivateService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      controllers: [ExamplesController],
-      providers: [ExamplesService],
+      controllers: [ExamplesPrivateController],
+      providers: [ExamplesPrivateService],
     }).compile();
 
     module.useLogger(false);
-    controller = module.get<ExamplesController>(ExamplesController);
-    service = module.get<ExamplesService>(ExamplesService);
+    controller = module.get<ExamplesPrivateController>(
+      ExamplesPrivateController,
+    );
+    service = module.get<ExamplesPrivateService>(ExamplesPrivateService);
   });
 
   it("should be defined", () => {

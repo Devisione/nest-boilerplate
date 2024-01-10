@@ -4,9 +4,9 @@ import type { UpdateExampleDto } from "./dto/update-example.dto";
 import type { Example } from "./entities/example.entity";
 
 @Injectable()
-export class ExamplesService {
+export class ExamplesPrivateService {
   public examplesList: Example[] = [];
-  private readonly logger = new Logger(ExamplesService.name);
+  private readonly logger = new Logger(ExamplesPrivateService.name);
 
   create(createExampleInputDto: CreateExampleDto): Example["id"] {
     this.logger.log(

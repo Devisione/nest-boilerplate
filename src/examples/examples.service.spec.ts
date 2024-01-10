@@ -1,7 +1,7 @@
 import type { TestingModule } from "@nestjs/testing";
 import { Test } from "@nestjs/testing";
 import { HttpException } from "@nestjs/common";
-import { ExamplesService } from "./examples.service";
+import { ExamplesPrivateService } from "./examples.private-service";
 import type { Example } from "./entities/example.entity";
 import type { CreateExampleDto } from "./dto/create-example.dto";
 
@@ -23,16 +23,16 @@ const CREATED_EXAMPLE_MOCK: Example = {
 };
 
 describe("Testing for examples service", () => {
-  let service: ExamplesService;
+  let service: ExamplesPrivateService;
 
   beforeEach(async () => {
     jest.spyOn(global.Math, "random").mockReturnValue(RANDOM_MOCK);
     const module: TestingModule = await Test.createTestingModule({
-      providers: [ExamplesService],
+      providers: [ExamplesPrivateService],
     }).compile();
 
     module.useLogger(false);
-    service = module.get<ExamplesService>(ExamplesService);
+    service = module.get<ExamplesPrivateService>(ExamplesPrivateService);
     service.examplesList = [EXAMPLE_MOCK];
   });
 

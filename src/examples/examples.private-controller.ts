@@ -6,15 +6,18 @@ import {
   Patch,
   Param,
   Delete,
+  UseGuards,
 } from "@nestjs/common";
-import { ExamplesService } from "./examples.service";
+import { AuthCookieGuard } from "../common/guards";
+import { ExamplesPrivateService } from "./examples.private-service";
 import { CreateExampleDto } from "./dto/create-example.dto";
 import { UpdateExampleDto } from "./dto/update-example.dto";
 import type { Example } from "./entities/example.entity";
 
+@UseGuards(AuthCookieGuard)
 @Controller("examples")
-export class ExamplesController {
-  constructor(private readonly exampleService: ExamplesService) {}
+export class ExamplesPrivateController {
+  constructor(private readonly exampleService: ExamplesPrivateService) {}
 
   @Post()
   create(@Body() createExampleDto: CreateExampleDto): Example["id"] {

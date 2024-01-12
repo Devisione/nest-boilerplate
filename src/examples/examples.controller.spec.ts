@@ -8,11 +8,11 @@ import type { CreateExampleDto } from "./dto/create-example.dto";
 const EXAMPLE_MOCK: Example = {
   id: 1,
   name: "name",
-  relatives: ["relative"],
+  relatives: [{ id: 1, name: "relative" }],
 };
 const CREATE_EXAMPLE_DTO_MOCK: CreateExampleDto = {
   name: "name",
-  relatives: ["relative"],
+  relatives: [{ name: "relative" }],
 };
 
 describe("Testing for examples controller", () => {

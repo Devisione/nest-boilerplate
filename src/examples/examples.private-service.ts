@@ -14,8 +14,12 @@ export class ExamplesPrivateService {
     );
 
     const newExampleItem: Example = {
-      ...createExampleInputDto,
       id: Math.floor(Math.random() * 1000000),
+      name: createExampleInputDto.name,
+      relatives: createExampleInputDto.relatives.map((relative) => ({
+        id: Math.floor(Math.random() * 1000000),
+        name: relative.name,
+      })),
     };
     this.examplesList.push(newExampleItem);
 
@@ -41,11 +45,8 @@ export class ExamplesPrivateService {
     );
 
     if (foundExampleIdx === -1) {
-      this.logger.error(`Example с id - ${id} не найден`);
       throw new HttpException(
-        {
-          error: `Example с id - ${id} не найден`,
-        },
+        `Example с id - ${id} не найден`,
         HttpStatus.BAD_REQUEST,
       );
     }
@@ -53,6 +54,12 @@ export class ExamplesPrivateService {
     const updatedExample: Example = {
       ...this.examplesList[foundExampleIdx],
       ...updateExampleDto,
+      relatives: updateExampleDto.relatives
+        ? updateExampleDto.relatives.map((relative) => ({
+            id: Math.floor(Math.random() * 1000000),
+            name: relative.name,
+          }))
+        : this.examplesList[foundExampleIdx].relatives,
     };
     this.examplesList.splice(
       foundExampleIdx,
@@ -72,7 +79,7 @@ export class ExamplesPrivateService {
     );
 
     if (foundExampleIdx === -1) {
-      this.logger.error(`Example с id - ${id} не найден`);
+      // Пример ошибки с объектом, можно выбросить любой объект и он попадет в ответ в поле data
       throw new HttpException(
         {
           error: `Example с id - ${id} не найден`,

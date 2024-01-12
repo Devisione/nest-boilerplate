@@ -1,4 +1,12 @@
-import { IsNumber, IsString } from "class-validator";
+import { IsNumber, IsString, ValidateNested } from "class-validator";
+
+class Relative {
+  @IsNumber()
+  id: number;
+
+  @IsString()
+  name: string;
+}
 
 export class Example {
   @IsNumber()
@@ -7,6 +15,6 @@ export class Example {
   @IsString()
   name: string;
 
-  @IsString({ each: true })
-  relatives: string[];
+  @ValidateNested({ each: true })
+  relatives: Relative[];
 }

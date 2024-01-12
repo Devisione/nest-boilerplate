@@ -1,12 +1,29 @@
-import { ArrayMaxSize, ArrayMinSize, IsString, Length } from "class-validator";
+import {
+  ArrayMaxSize,
+  IsArray,
+  IsNotEmpty,
+  IsString,
+  Length,
+  ValidateNested,
+} from "class-validator";
+import { Type } from "class-transformer";
+
+class RelativeDto {
+  @Length(5, 20)
+  @IsString({ message: "$property Строка" })
+  name: string;
+}
 
 export class CreateExampleDto {
   @Length(5, 20)
   @IsString()
+  @IsNotEmpty()
   name: string;
 
-  @IsString({ each: true })
-  @ArrayMinSize(1)
+  @Type(() => RelativeDto)
+  @ValidateNested({ each: true })
   @ArrayMaxSize(5)
-  relatives: string[];
+  @IsArray()
+  @IsNotEmpty()
+  relatives: RelativeDto[];
 }

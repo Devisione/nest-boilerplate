@@ -11,15 +11,16 @@ const CREATE_EXAMPLE_ID_MOCK = Math.floor(RANDOM_MOCK * 1000000);
 const EXAMPLE_MOCK: Example = {
   id: 1,
   name: "name",
-  relatives: ["relative"],
+  relatives: [{ id: 1, name: "relative" }],
 };
 const CREATE_EXAMPLE_DTO_MOCK: CreateExampleDto = {
   name: "name",
-  relatives: ["relative"],
+  relatives: [{ name: "relative" }],
 };
 const CREATED_EXAMPLE_MOCK: Example = {
   id: CREATE_EXAMPLE_ID_MOCK,
   ...CREATE_EXAMPLE_DTO_MOCK,
+  relatives: [{ id: CREATE_EXAMPLE_ID_MOCK, name: "relative" }],
 };
 
 describe("Testing for examples service", () => {

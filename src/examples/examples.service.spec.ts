@@ -54,21 +54,21 @@ describe("Testing for examples service", () => {
   });
 
   it("should create example", () => {
-    expect(service.create(CREATE_EXAMPLE_DTO_MOCK)).toEqual(
-      CREATE_EXAMPLE_ID_MOCK,
-    );
+    expect(service.create(CREATE_EXAMPLE_DTO_MOCK)).toEqual({
+      id: CREATE_EXAMPLE_ID_MOCK,
+    });
     expect(service.examplesList).toEqual([EXAMPLE_MOCK, CREATED_EXAMPLE_MOCK]);
   });
 
   it("should update example", () => {
-    expect(service.update(1, { name: "updated" })).toEqual(1);
+    expect(service.update(1, { name: "updated" })).toEqual({ id: 1 });
     expect(service.findOne(1)).toEqual({ ...EXAMPLE_MOCK, name: "updated" });
 
     expect(() => service.update(2, { name: "updated" })).toThrow(HttpException);
   });
 
   it("should remove example", () => {
-    expect(service.remove(1)).toEqual(1);
+    expect(service.remove(1)).toEqual({ id: 1 });
     expect(service.examplesList).toEqual([]);
 
     expect(() => service.remove(2)).toThrow(HttpException);

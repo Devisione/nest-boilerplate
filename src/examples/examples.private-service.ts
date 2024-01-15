@@ -1,14 +1,21 @@
 import { HttpException, HttpStatus, Injectable, Logger } from "@nestjs/common";
-import type { CreateExampleDto } from "./dto/create-example.dto";
-import type { UpdateExampleDto } from "./dto/update-example.dto";
 import type { Example } from "./entities/example.entity";
+import type {
+  CreateExampleDto,
+  CreateExampleOutputDto,
+} from "./dto/create-example.dto";
+import type {
+  UpdateExampleDto,
+  UpdateExampleOutputDto,
+} from "./dto/update-example.dto";
+import type { DeleteExampleOutputDto } from "./dto/delete-example.dto";
 
 @Injectable()
 export class ExamplesPrivateService {
   public examplesList: Example[] = [];
   private readonly logger = new Logger(ExamplesPrivateService.name);
 
-  create(createExampleInputDto: CreateExampleDto): Example["id"] {
+  create(createExampleInputDto: CreateExampleDto): CreateExampleOutputDto {
     this.logger.log(
       `Создание example: ${JSON.stringify(createExampleInputDto)}`,
     );
@@ -26,7 +33,7 @@ export class ExamplesPrivateService {
     this.logger.verbose(
       `Example c name - ${createExampleInputDto.name} успешно создан`,
     );
-    return newExampleItem.id;
+    return { id: newExampleItem.id };
   }
 
   findAll(): Example[] {
@@ -37,7 +44,10 @@ export class ExamplesPrivateService {
     return this.examplesList.find((example) => example.id === id);
   }
 
-  update(id: number, updateExampleDto: UpdateExampleDto): Example["id"] {
+  update(
+    id: number,
+    updateExampleDto: UpdateExampleDto,
+  ): UpdateExampleOutputDto {
     this.logger.log(`Обновление example с id - ${id}`);
 
     const foundExampleIdx = this.examplesList.findIndex(
@@ -68,10 +78,10 @@ export class ExamplesPrivateService {
     );
 
     this.logger.verbose(`Example c id - ${id} успешно обновлен`);
-    return id;
+    return { id };
   }
 
-  remove(id: number): Example["id"] {
+  remove(id: number): DeleteExampleOutputDto {
     this.logger.log(`Удаление example с id - ${id}`);
 
     const foundExampleIdx = this.examplesList.findIndex(
@@ -93,6 +103,6 @@ export class ExamplesPrivateService {
     );
 
     this.logger.verbose(`Example c id - ${id} успешно удален`);
-    return id;
+    return { id };
   }
 }

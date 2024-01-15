@@ -47,17 +47,17 @@ describe("Testing for examples controller", () => {
   });
 
   it("should create examples", () => {
-    jest.spyOn(service, "create").mockImplementation(() => 1);
-    expect(controller.create(CREATE_EXAMPLE_DTO_MOCK)).toEqual(1);
+    jest.spyOn(service, "create").mockImplementation(() => ({ id: 1 }));
+    expect(controller.create(CREATE_EXAMPLE_DTO_MOCK)).toEqual({ id: 1 });
   });
 
   it("should update example", () => {
-    jest.spyOn(service, "update").mockImplementation(() => 1);
-    expect(controller.update("1", { name: "updated" })).toEqual(1);
+    jest.spyOn(service, "update").mockImplementation(() => ({ id: 1 }));
+    expect(controller.update("1", { name: "updated" })).toEqual({ id: 1 });
   });
 
   it("should remove example", () => {
-    jest.spyOn(service, "remove").mockImplementation(() => 1);
-    expect(controller.remove("1")).toEqual(1);
+    jest.spyOn(service, "remove").mockImplementation(() => ({ id: 1 }));
+    expect(controller.remove("1")).toEqual({ id: 1 });
   });
 });

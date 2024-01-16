@@ -16,6 +16,14 @@
     "noImplicitAny": true,
     "strictBindCallApply": true,
     "forceConsistentCasingInFileNames": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "paths": {
+      "@app/http": [
+        "libs/http/src"
+      ],
+      "@app/http/*": [
+        "libs/http/src/*"
+      ]
+    }
   }
 }

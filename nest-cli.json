@@ -3,7 +3,21 @@
   "collection": "@nestjs/schematics",
   "sourceRoot": "src",
   "compilerOptions": {
-    "plugins": ["@nestjs/swagger"],
-    "deleteOutDir": true
+    "plugins": [
+      "@nestjs/swagger"
+    ],
+    "deleteOutDir": true,
+    "webpack": true
+  },
+  "projects": {
+    "http": {
+      "type": "library",
+      "root": "libs/http",
+      "entryFile": "index",
+      "sourceRoot": "libs/http/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/http/tsconfig.lib.json"
+      }
+    }
   }
 }

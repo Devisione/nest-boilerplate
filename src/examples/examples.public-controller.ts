@@ -10,12 +10,22 @@ import { ExamplesPublicService } from "./examples.public-service";
 export class ExamplesPublicController {
   constructor(private readonly examplesPublicService: ExamplesPublicService) {}
 
-  @Get("/health-check")
+  @Get("/external-request")
   @ApiOkResponse({
-    type: "string",
     description: "Описание ответа",
   })
-  find(): string {
+  exampleExternalRequest(): Promise<{
+    products: object[];
+    posts: object[];
+  }> {
+    return this.examplesPublicService.exampleExternalRequest();
+  }
+
+  @Get("/health-check")
+  @ApiOkResponse({
+    description: "Описание ответа",
+  })
+  healthCheck(): string {
     return this.examplesPublicService.healthCheck();
   }
 }

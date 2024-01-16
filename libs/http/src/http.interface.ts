@@ -19,5 +19,6 @@ export interface HttpModuleAsyncOptions
   useFactory?: (
     ...args: unknown[]
   ) => Promise<HttpModuleOptions> | HttpModuleOptions;
+  // eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents -- never необходим для соответствия с внутренним типом неста
   inject?: (InjectionToken | OptionalFactoryDependency)[] | never;
 }

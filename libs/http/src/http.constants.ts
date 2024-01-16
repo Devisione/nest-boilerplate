@@ -1,1 +1,1 @@
-export const AXIOS_TOKEN = "AXIOS_TOKEN";
+export const HTTP_MODULE_TOKEN = "HTTP_MODULE_TOKEN";

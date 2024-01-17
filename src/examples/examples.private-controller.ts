@@ -14,6 +14,7 @@ import {
   ApiCreatedResponse,
   ApiOkResponse,
   ApiTags,
+  ApiBody,
 } from "@nestjs/swagger";
 import { AuthCookieGuard } from "../common/guards";
 import { ExamplesPrivateService } from "./examples.private-service";
@@ -40,6 +41,11 @@ export class ExamplesPrivateController {
   @ApiCreatedResponse({
     type: CreateExampleOutputDto,
     description: "Создание примера",
+  })
+  // В свагер автоматически попадает схема из @Body, но для кастомного описания можно использовать декораторы ApiBody, ApiParam и т.д
+  @ApiBody({
+    type: [CreateExampleDto],
+    description: "Объект для создания примера",
   })
   create(@Body() createExampleDto: CreateExampleDto): CreateExampleOutputDto {
     return this.exampleService.create(createExampleDto);

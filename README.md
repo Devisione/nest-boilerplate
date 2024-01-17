@@ -1,13 +1,25 @@
-// Свагер (кодген)
-// Стайлгайд
+## Документация
+Структура:  
+- [Структура](docs%2Fstructure.md)    
 
-## Installation
+Описание кода и сущностей Nest:
+- [Контроллер](docs%2Fcode%2Fcontroller.md)
+- [Сервис (Провайдер)](docs%2Fcode%2Fservice.md)
+- [DTO](docs%2Fcode%2Fdto.md)
+
+## Генерация сущностей Nest
+Для того, чтобы создать модуль, котроллер, провайдер или любую другую сущность Nest используейте `nest-cli`.    
+Подробнее [здесь](https://docs.nestjs.com/cli/overview)
+#### **!!!Вручную ничего создавать не нужно**
+
+
+## Установка
 
 ```bash
 $ yarn install
 ```
 
-## Running the app
+## Запуск
 
 ```bash
 # development

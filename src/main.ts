@@ -12,7 +12,9 @@ async function bootstrap(): Promise<void> {
   const configService: ConfigService<Configuration, true> =
     app.get(ConfigService);
   const port = configService.get("port", { infer: true });
+  const origin = configService.get("origin", { infer: true });
 
+  app.enableCors({ origin });
   app.use(cookieParser());
   app.useGlobalFilters(new AllExceptionFilter());
   app.useGlobalPipes(new CustomValidationPipe());

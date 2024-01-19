@@ -1,5 +1,6 @@
 export interface Configuration {
   port: number;
+  origin: string;
   api: {
     external: string;
   };
@@ -20,6 +21,7 @@ const getEnvVariable = <Data>(
 
 export const configuration = (): Configuration => ({
   port: getEnvVariable("PORT", 3000, Number),
+  origin: getEnvVariable("ORIGIN", ""),
   api: {
     external: getEnvVariable("EXTERNAL_API_URL", ""),
   },
